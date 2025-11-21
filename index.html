@@ -1,167 +1,28 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>個人命盤分析</title>
-    <!-- 這裡可以加入 CSS 樣式，讓頁面更美觀 -->
-    <style>
-        body { 
-            font-family: '微軟正黑體', 'Arial', sans-serif; 
-            background-color: #f4f7f6; 
-            color: #333; 
-            margin: 0; 
-            padding: 20px;
-        }
-        .container { 
-            max-width: 900px; 
-            margin: 0 auto; 
-            background: #fff; 
-            padding: 30px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        h1 { 
-            text-align: center; 
-            color: #2c3e50; 
-            border-bottom: 2px solid #3498db; 
-            padding-bottom: 10px;
-        }
-        .input-section, .output-section { 
-            margin-top: 25px; 
-            padding: 20px; 
-            border: 1px solid #ddd; 
-            border-radius: 6px;
-        }
-        label { 
-            display: block; 
-            margin-top: 15px; 
-            font-weight: bold;
-        }
-        input[type="text"], input[type="date"], input[type="time"] { 
-            width: 100%; 
-            padding: 10px; 
-            margin-top: 5px; 
-            border: 1px solid #ccc; 
-            border-radius: 4px; 
-            box-sizing: border-box;
-        }
-        button { 
-            display: block;
-            width: 100%;
-            padding: 12px; 
-            margin-top: 20px; 
-            background-color: #3498db; 
-            color: white; 
-            border: none; 
-            border-radius: 4px; 
-            cursor: pointer; 
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        #chart-display {
-            min-height: 350px;
-            background-color: #ecf0f1;
-            border: 1px dashed #bdc3c7;
-            margin-top: 15px;
-            padding: 20px;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-style: italic;
-            color: #7f8c8d;
-        }
-        #interpretation {
-            white-space: pre-wrap;
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-left: 5px solid #e67e22;
-            margin-top: 10px;
-        }
-    </style>
+    <title>靜態八字命盤</title>
+    
+    <!-- 步驟 2.1：在這裡連結您複製的 CSS 檔案 -->
+    <link rel="stylesheet" href="styles/astrology.css"> 
+    
+    <!-- 您可能還需要一個通用的 CSS 檔案來設定字體、重置樣式等 -->
+    <!-- <link rel="stylesheet" href="styles/global.css"> -->
 </head>
 <body>
 
-    <div class="container">
-        <h1>個人命盤分析器</h1>
-
-        <!-- 資訊輸入區 -->
-        <section class="input-section">
-            <h2>輸入您的出生資訊</h2>
-            <form id="birth-info-form">
-                <div>
-                    <label for="name">姓名：</label>
-                    <input type="text" id="name" name="name" placeholder="請輸入您的姓名" required>
-                </div>
-                <div>
-                    <label for="birth-date">出生日期：</label>
-                    <input type="date" id="birth-date" name="birth-date" required>
-                </div>
-                <div>
-                    <label for="birth-time">出生時間 (當地時間)：</label>
-                    <input type="time" id="birth-time" name="birth-time" required>
-                </div>
-                <div>
-                    <label for="location">出生地點 (城市/時區)：</label>
-                    <input type="text" id="location" name="location" placeholder="例如：台北市，用於時區校正" required>
-                </div>
-                
-                <button type="submit">生成命盤</button>
-            </form>
+    <!-- 步驟 2.2：將您複製的 <main> 內容貼在這裡 -->
+    <main class="page-astrology">
+        <!-- 您複製的內容從這裡開始 -->
+        <section class="astrology-result">
+            <!-- ... 您的八字命盤內容 ... -->
         </section>
+        <div class="messageIcon">
+            <!-- ... 訊息圖示 ... -->
+        </div>
+    </main>
 
-        <!-- 結果顯示區 -->
-        <section class="output-section">
-            <h2>您的命盤結果</h2>
-            
-            <div id="chart-display">
-                <!-- 命盤圖示區：這裡將顯示星盤或紫微斗數盤的視覺化圖表 -->
-                請在上方輸入資訊並點擊「生成命盤」
-            </div>
-
-            <h3>分析與解讀</h3>
-            <div id="interpretation">
-                <!-- 解讀文字區：這裡將顯示針對命盤的詳細分析 -->
-                等待分析結果...
-            </div>
-        </section>
-    </div>
-
-    <!-- JavaScript 處理邏輯 -->
-    <script>
-        document.getElementById('birth-info-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const date = document.getElementById('birth-date').value;
-            const time = document.getElementById('birth-time').value;
-            const location = document.getElementById('location').value;
-
-            // 1. 更新圖示區狀態
-            document.getElementById('chart-display').innerHTML = `
-                <p>正在為 ${name} 計算命盤...</p>
-                <p>出生：${date} ${time}，地點：${location}</p>
-                <p>（注意：此處需連接後端服務或專業函式庫才能進行準確的命盤計算與繪製。）</p>
-            `;
-            
-            // 2. 模擬分析結果
-            document.getElementById('interpretation').textContent = `
-                [命盤類型：占星術/紫微斗數]
-                
-                太陽星座：[計算結果]
-                上升星座：[計算結果]
-                
-                [詳細解讀]
-                您的命盤顯示您在[領域]方面具有強烈的潛能，但在[領域]可能需要更多的平衡。
-                請參考專業命理師的進一步解讀。
-            `;
-
-            // 實際應用中，您會在這裡使用 fetch 或 XMLHttpRequest 將資料發送到伺服器進行計算。
-        });
-    </script>
 </body>
 </html>
